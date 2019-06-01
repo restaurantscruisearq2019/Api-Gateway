@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const graphqlHTTP = require('express-graphql');
 var router = require('./routes/router');
+const bodyParser = require('body-parser');
 const MyGraphQLSchema = require('./graphQL/graphQL');
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./routes/index")(app);
 
