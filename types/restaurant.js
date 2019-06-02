@@ -15,7 +15,7 @@ const MenuType = new GraphQLObjectType({
   })
 })
 
-const RestaurantType = new GraphQLObjectType({
+const Restaurant = new GraphQLObjectType({
   name: "Restaurant",
   description: "Restaurants information fro API service",
   fields: () => ({
@@ -43,4 +43,4 @@ const RestaurantType = new GraphQLObjectType({
   })
 });
 
-module.exports = RestaurantType;
+module.exports = Restaurant;

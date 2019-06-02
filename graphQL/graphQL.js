@@ -1,56 +1,49 @@
 const {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLList,
-  GraphQLString,
-  GraphQLID,
-  GraphQLNonNull
+  GraphQLList
 } = require("graphql");
 
-const restaurantType = require("../types/restaurant");
+const Restaurant = require("../types/restaurant");
 const getRestaurant = require("../services/restaurant");
+const {Client, Group, ReservedGroup} = require("../types/reservation");
+const {getReservationClients, getReservationGroups, getReservationReservedGroups} = require("../services/reservation");
+const {Manager,Employee} = require("../types/staffManagement");
+const {getStaffEmployees, getStaffManagers} = require("../services/staffManagement");
 
-var initQuery = new GraphQLObjectType({
+var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     restaurants: {
-      type: new GraphQLList(restaurantType),
+      type: new GraphQLList(Restaurant),
       resolve: getRestaurant
+    },
+    clients: {
+      type: new GraphQLList(Client),
+      resolve: getReservationClients
+    },
+    groups: {
+      type: new GraphQLList(Group),
+      resolve: getReservationGroups
+    },
+    reservedgroups: {
+      type: new GraphQLList(ReservedGroup),
+      resolve: getReservationReservedGroups
+    },
+    managers: {
+      type: new GraphQLList(Manager),
+      resolve: getStaffManagers
+    },
+    employees: {
+      type: new GraphQLList(Employee),
+      resolve: getStaffEmployees
     }
   }
 });
 
+
 const schema = new GraphQLSchema({
-  query: initQuery,
-
-  //Reservation
-
-  type: new GraphQLObjectType({
-    name: 'client',
-    fields: {
-      name: {type: new GraphQLNonNull(GraphQLString)},
-      id: {type: new GraphQLNonNull(GraphQLID)},
-      groupid: {type: new GraphQLNonNull(GraphQLString)}
-    }
-  }),
-
-  type: new GraphQLObjectType({
-    name: 'group',
-    fields: {
-      id: {type: new GraphQLNonNull(GraphQLID)}
-    }
-  }),
-
-  type: new GraphQLObjectType({
-    name: 'reservedgroup',
-    fields: {
-      id: {type: new GraphQLNonNull(GraphQLID)},
-      startdate: {type: new GraphQLNonNull(GraphQLString)},
-      enddate: {type: new GraphQLNonNull(GraphQLString)},
-      groupid: {type: new GraphQLNonNull(GraphQLString)},
-      restaurantid: {type: new GraphQLNonNull(GraphQLString)}
-    }
-  })
+  query: allGetQuery
 });
 
 module.exports = schema;
