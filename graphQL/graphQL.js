@@ -1,19 +1,39 @@
 const {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLList
+  GraphQLList,
+  GraphQLString
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const getRestaurant = require("../services/restaurant");
-const {Client, Group, ReservedGroup} = require("../types/reservation");
-const {getReservationClients, getReservationGroups, getReservationReservedGroups} = require("../services/reservation");
-const {Manager,Employee} = require("../types/staffManagement");
-const {getStaffEmployees, getStaffManagers} = require("../services/staffManagement");
+const { getRestaurant, getRestaurantById } = require("../services/restaurant");
+const { Client, Group, ReservedGroup } = require("../types/reservation");
+const {
+  getReservationClients,
+  getReservationGroups,
+  getReservationReservedGroups
+} = require("../services/reservation");
+const { Manager, Employee } = require("../types/staffManagement");
+const {
+  getStaffEmployees,
+  getStaffManagers
+} = require("../services/staffManagement");
 
 var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    restaurantById: {
+      type: Restaurant,
+      args: {
+        id: {
+          type: GraphQLString
+        }
+      },
+      resolve: async (source, { id }) => {
+        const result = await getRestaurantById(id);
+        return result;
+      }
+    },
     restaurants: {
       type: new GraphQLList(Restaurant),
       resolve: getRestaurant
@@ -40,7 +60,6 @@ var allGetQuery = new GraphQLObjectType({
     }
   }
 });
-
 
 const schema = new GraphQLSchema({
   query: allGetQuery
