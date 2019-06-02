@@ -3,11 +3,13 @@ const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLBoolean,
+  GraphQLNonNull
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const { getRestaurant } = require("../services/restaurant");
+const { getRestaurant, getDayInfoRestaurants } = require("../services/restaurant");
 const { Client, Group, ReservedGroup } = require("../types/reservation");
 const {
   getReservationClients,
@@ -68,6 +70,10 @@ var allGetQuery = new GraphQLObjectType({
     employees: {
       type: new GraphQLList(Employee),
       resolve: getStaffEmployees
+    },
+    getDayInfo: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      resolve: getDayInfoRestaurants
     }
   }
 });
