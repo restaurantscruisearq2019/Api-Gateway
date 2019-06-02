@@ -6,13 +6,6 @@ const getRestaurant = async (id = null) => {
   return id ? res.data.data.filter(r => r._id === id) : res.data.data;
 };
 
-const getRestaurantById = async (id = null) => {
-  const url = "http://localhost:5001/restaurants/" + id;
-  const res = await axios.get(url);
-  return res.data.data;
-};
-
 module.exports = {
-  getRestaurant,
-  getRestaurantById
+  getRestaurant
 };

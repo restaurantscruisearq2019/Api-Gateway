@@ -22,18 +22,6 @@ const {
 var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    restaurantById: {
-      type: Restaurant,
-      args: {
-        id: {
-          type: GraphQLString
-        }
-      },
-      resolve: async (source, { id }) => {
-        const result = await getRestaurant(id);
-        return result;
-      }
-    },
     restaurants: {
       type: new GraphQLList(Restaurant),
       args: {
