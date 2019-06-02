@@ -30,13 +30,16 @@ var allGetQuery = new GraphQLObjectType({
         }
       },
       resolve: async (source, { id }) => {
-        const result = await getRestaurantById(id);
+        const result = await getRestaurant(id);
         return result;
       }
     },
     restaurants: {
       type: new GraphQLList(Restaurant),
-      resolve: getRestaurant
+      resolve: async (source, { id }) => {
+        const result = await getRestaurant();
+        return result;
+      }
     },
     clients: {
       type: new GraphQLList(Client),
