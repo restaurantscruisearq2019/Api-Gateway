@@ -12,11 +12,14 @@ const transform = data => {
   console.log(restaurant);
 
   return {
-    id: restaurant.id,
+    _id: restaurant._id,
     name: restaurant.name,
     category: restaurant.category,
     capacity: restaurant.capacity,
-    isopen: restaurant.isopen
+    isopen: restaurant.isopen,
+    menu: {
+      priceRange: restaurant.menu.priceRange
+    }
   };
 };
 

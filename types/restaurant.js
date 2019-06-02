@@ -3,15 +3,24 @@ const {
   GraphQLNonNull,
   GraphQLString,
   GraphQLInt,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLID
 } = require("graphql/type");
+
+const MenuType = new GraphQLObjectType({
+  name: "Menu",
+  fields: () => ({
+    mType: { type: new GraphQLNonNull(GraphQLString) },
+    priceRange: { type: new GraphQLNonNull(GraphQLString) }
+  })
+})
 
 const RestaurantType = new GraphQLObjectType({
   name: "Restaurant",
   description: "Restaurants information fro API service",
   fields: () => ({
-    id: {
-      type: GraphQLString,
+    _id: {
+      type: new GraphQLNonNull(GraphQLID),
       description: "Restaurant id"
     },
     name: {
@@ -19,20 +28,18 @@ const RestaurantType = new GraphQLObjectType({
       description: "Restaurant name"
     },
     category: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: "Category of the restaurant"
     },
     capacity: {
-      type: GraphQLInt,
+      type: new GraphQLNonNull(GraphQLInt),
       description: "Restaurant's capacity"
     },
     isopen: {
-      type: GraphQLBoolean,
+      type: new GraphQLNonNull(GraphQLBoolean),
       description: "Is the restaurant open?"
-    }
-    // menu: {
-    //   type:
-    // }
+    },
+    menu: { type: new GraphQLNonNull(MenuType) }
   })
 });
 
