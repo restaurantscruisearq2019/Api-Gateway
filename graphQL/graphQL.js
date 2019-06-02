@@ -1,12 +1,20 @@
-const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+const {
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLList,
+  GraphQLString
+} = require("graphql");
 
-const restaurantQuery = require("../queries/restaurantQuery");
+const restaurantType = require("../types/restaurant");
 const getRestaurant = require("../services/restaurant");
 
 var query = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    restaurants: { type: restaurantQuery, resolve: getRestaurant }
+    restaurants: {
+      type: new GraphQLList(restaurantType),
+      resolve: getRestaurant
+    }
   }
 });
 

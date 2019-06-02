@@ -6,8 +6,6 @@ const {
   GraphQLBoolean
 } = require("graphql/type");
 
-const { getRestaurant } = require("../services/restaurant");
-
 const RestaurantType = new GraphQLObjectType({
   name: "Restaurant",
   description: "Restaurants information fro API service",
@@ -32,6 +30,9 @@ const RestaurantType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: "Is the restaurant open?"
     }
+    // menu: {
+    //   type:
+    // }
   })
 });
 
