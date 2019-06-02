@@ -2,11 +2,12 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLList,
-  GraphQLString
+  GraphQLString,
+  GraphQLInt
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const { getRestaurant, getRestaurantById } = require("../services/restaurant");
+const { getRestaurant } = require("../services/restaurant");
 const { Client, Group, ReservedGroup } = require("../types/reservation");
 const {
   getReservationClients,
@@ -18,6 +19,8 @@ const {
   getStaffEmployees,
   getStaffManagers
 } = require("../services/staffManagement");
+const DailyReservation = require("../types/reservationTransaction");
+const getTodayClientReservation = require("../services/reservationTransaction");
 
 var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -31,6 +34,18 @@ var allGetQuery = new GraphQLObjectType({
       },
       resolve: async (source, { id }) => {
         const result = await getRestaurant(id);
+        return result;
+      }
+    },
+    ClientDailyReservation:{
+      type: DailyReservation,
+      args:{
+        clientID: { type: GraphQLInt },
+        date: { type: GraphQLString }
+      },
+      resolve: async (source, { clientID, date }) => {
+        const result = await getTodayClientReservation(clientID, date);
+        //console.log(result);
         return result;
       }
     },
