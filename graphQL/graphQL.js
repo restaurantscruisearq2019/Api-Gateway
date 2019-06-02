@@ -1,22 +1,17 @@
-const {
-    graphql,
-    GraphQLSchema,
-    GraphQLObjectType,
-    GraphQLString
-  } = require('graphql');
-  
-  var schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-      name: 'RootQueryType',
-      fields: {
-        hello: {
-          type: GraphQLString,
-          resolve() {
-            return 'world';
-          }
-        }
-      }
-    })
-  });
+const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
-  module.exports = schema;
+const restaurantQuery = require("../queries/restaurantQuery");
+const getRestaurant = require("../services/restaurant");
+
+var query = new GraphQLObjectType({
+  name: "RootQueryType",
+  fields: {
+    restaurants: { type: restaurantQuery, resolve: getRestaurant }
+  }
+});
+
+const schema = new GraphQLSchema({
+  query
+});
+
+module.exports = schema;
