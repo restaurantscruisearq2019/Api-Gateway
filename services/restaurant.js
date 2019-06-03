@@ -12,7 +12,16 @@ const getDayInfoRestaurants = async () => {
   return res.data.data[0].isopen;
 };
 
+const getRestaurantsByCategories = async (category) => {
+  const url = "http://localhost:5001/restaurants";
+  const res = await axios.get(url);
+  const restaurantsByCategories = res.data.data.filter(r => r.category === category);
+  return restaurantsByCategories;
+};
+
+
 module.exports = {
   getRestaurant,
-  getDayInfoRestaurants
+  getDayInfoRestaurants,
+  getRestaurantsByCategories
 };

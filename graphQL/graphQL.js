@@ -9,7 +9,7 @@ const {
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const { getRestaurant, getDayInfoRestaurants } = require("../services/restaurant");
+const { getRestaurant, getDayInfoRestaurants, getRestaurantsByCategories } = require("../services/restaurant");
 const { Client, Group, ReservedGroup } = require("../types/reservation");
 const {
   getReservationClients,
@@ -74,6 +74,16 @@ var allGetQuery = new GraphQLObjectType({
     getDayInfo: {
       type: new GraphQLNonNull(GraphQLBoolean),
       resolve: getDayInfoRestaurants
+    },
+    getRestaurantsByCategories: {
+      type: new GraphQLList(Restaurant),
+      args: {
+        category: { type: GraphQLString }
+      },
+      resolve: async (source, { category }) => {
+        const result = await getRestaurantsByCategories(category);
+        return result;
+      }
     }
   }
 });
