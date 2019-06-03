@@ -26,9 +26,17 @@ const getRestaurantsByPricerange = async (priceRange) => {
   return restaurantsByPricerange;
 };
 
+const getRestaurantsByMenu = async (mType) => {
+  const url = "http://localhost:5001/restaurants";
+  const res = await axios.get(url);
+  const restaurantsByMenu = res.data.data.filter(r => r.menu.mType === mType);
+  return restaurantsByMenu;
+};
+
 module.exports = {
   getRestaurant,
   getDayInfoRestaurants,
   getRestaurantsByCategories,
-  getRestaurantsByPricerange
+  getRestaurantsByPricerange,
+  getRestaurantsByMenu
 };
