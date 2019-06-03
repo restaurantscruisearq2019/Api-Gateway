@@ -19,7 +19,8 @@ const {
 const { Manager, Employee } = require("../types/staffManagement");
 const {
   getStaffEmployees,
-  getStaffManagers
+  getStaffManagers,
+  getManagerAccount
 } = require("../services/staffManagement");
 const DailyReservation = require("../types/reservationTransaction");
 const getTodayClientReservation = require("../services/reservationTransaction");
@@ -102,6 +103,17 @@ var allGetQuery = new GraphQLObjectType({
       },
       resolve: async (source, { mType }) => {
         const result = await getRestaurantsByMenu(mType);
+        return result;
+      }
+    },
+    verifyManager:{
+      type: Manager,
+      args: {
+        userName: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve: async (source, { userName, password }) => {
+        const result = await getManagerAccount(userName, password);
         return result;
       }
     }

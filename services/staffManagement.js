@@ -30,6 +30,40 @@ const getStaffManagers = async () => {
     return managersObj;
 };
 
+const getManagerAccount = async (userName, password) => {
+    const managersUrl = "http://localhost:5002/managers";
+    const employeesUrl = "http://localhost:5002/employees";
+    const managers = await axios.get(managersUrl);
+    const employees = await axios.get(employeesUrl);
+
+    const managerUserNames = managers.data.data.filter(m => {
+        return (m.userName === userName) && (m.password === password);
+    })
+
+    if(managerUserNames.length !== 1){
+        return null;
+    }
+    
+    const managerEmployees = employees.data.data.filter( e =>{
+      return managerUserNames.filter( m => {
+        return m.employees.filter( eID => {
+          return eID === e._id;
+        })
+      })
+    });
+
+    const manager = {
+        name: managerUserNames[0].name,
+        _id: managerUserNames[0]._id,
+        userName: managerUserNames[0].userName,
+        password: managerUserNames[0].password,
+        restaurantid: managerUserNames[0].restaurantid,
+        employees: managerEmployees
+    };
+
+    return manager;
+};
+
 const getStaffEmployees = async () => {
     const url = "http://localhost:5002/employees";
     const res = await axios.get(url);
@@ -38,5 +72,6 @@ const getStaffEmployees = async () => {
 
 module.exports = {
     getStaffManagers,
-    getStaffEmployees
+    getStaffEmployees,
+    getManagerAccount
 };
