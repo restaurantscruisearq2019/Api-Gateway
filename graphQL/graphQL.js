@@ -9,7 +9,7 @@ const {
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const { getRestaurant, getDayInfoRestaurants, getRestaurantsByCategories } = require("../services/restaurant");
+const { getRestaurant, getDayInfoRestaurants, getRestaurantsByCategories, getRestaurantsByPricerange } = require("../services/restaurant");
 const { Client, Group, ReservedGroup } = require("../types/reservation");
 const {
   getReservationClients,
@@ -82,6 +82,16 @@ var allGetQuery = new GraphQLObjectType({
       },
       resolve: async (source, { category }) => {
         const result = await getRestaurantsByCategories(category);
+        return result;
+      }
+    },
+    getRestaurantsByPricerange: {
+      type: new GraphQLList(Restaurant),
+      args: {
+        priceRange: { type: GraphQLString }
+      },
+      resolve: async (source, { priceRange }) => {
+        const result = await getRestaurantsByPricerange(priceRange);
         return result;
       }
     }
