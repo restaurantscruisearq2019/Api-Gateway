@@ -2,9 +2,9 @@ const axios = require("axios");
 
 
 const getTodayClientReservation = async (clientID, date) => {
-  const restaurantsUrl = "http://localhost:5001/restaurants";
-  const clientsUrl = "http://localhost:5003/clients";
-  const reservedgroupsUrl = "http://localhost:5003/reservedgroups";
+  const restaurantsUrl = "http://ec2-54-237-152-58.compute-1.amazonaws.com:5000/restaurants";
+  const clientsUrl = "http://ec2-35-171-153-128.compute-1.amazonaws.com:5000/clients";
+  const reservedgroupsUrl = "http://ec2-35-171-153-128.compute-1.amazonaws.com:5000/reservedgroups";
 
   const clients = await axios.get(clientsUrl);
   const restaurants = await axios.get(restaurantsUrl);

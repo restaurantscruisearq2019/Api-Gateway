@@ -1,0 +1,10 @@
+version: "3.1"
+services:
+  api:
+    image: miacastroco/apigateway
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/api
+      - /api/node_modules

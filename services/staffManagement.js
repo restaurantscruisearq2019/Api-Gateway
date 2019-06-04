@@ -1,8 +1,8 @@
 const axios = require("axios");
 
 const getStaffManagers = async () => {
-    const managersUrl = "http://localhost:5002/managers";
-    const employeesUrl = "http://localhost:5002/employees";
+    const managersUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/managers";
+    const employeesUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
     const managers = await axios.get(managersUrl);
     const employees = await axios.get(employeesUrl);
     
@@ -31,8 +31,8 @@ const getStaffManagers = async () => {
 };
 
 const getManagerAccount = async (userName, password) => {
-    const managersUrl = "http://localhost:5002/managers";
-    const employeesUrl = "http://localhost:5002/employees";
+    const managersUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/managers";
+    const employeesUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
     const managers = await axios.get(managersUrl);
     const employees = await axios.get(employeesUrl);
 
@@ -65,7 +65,7 @@ const getManagerAccount = async (userName, password) => {
 };
 
 const getStaffEmployees = async () => {
-    const url = "http://localhost:5002/employees";
+    const url = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
     const res = await axios.get(url);
     return res.data.data;
 };
