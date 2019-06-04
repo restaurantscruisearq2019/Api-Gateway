@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const apiAdapter = require("../config/apiAdapter");
 
-const BASE_URL = "http://localhost:5001";
+const BASE_URL = "http://ec2-54-237-152-58.compute-1.amazonaws.com:5000";
 const api = apiAdapter(BASE_URL);
 
 router.get("/restaurants", (req, res) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiAdapter = require('../config/apiAdapter');
 
-const BASE_URL = 'http://localhost:5002';
+const BASE_URL = 'http://ec2-3-95-202-154.compute-1.amazonaws.com:5000';
 const api = apiAdapter(BASE_URL);
 
 //Managers

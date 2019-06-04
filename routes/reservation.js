@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiAdapter = require('../config/apiAdapter');
 
-const BASE_URL = 'http://localhost:5003';
+const BASE_URL = 'http://ec2-35-171-153-128.compute-1.amazonaws.com:5000';
 const api = apiAdapter(BASE_URL);
 
 //Reserved Groups

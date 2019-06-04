@@ -7,8 +7,6 @@ const MyGraphQLSchema = require("./graphQL/graphQL");
 
 const cors = require("cors");
 
-const getRestaurant = require("./services/restaurant");
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

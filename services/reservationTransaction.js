@@ -25,17 +25,7 @@ const getTodayClientReservation = async (clientID, date) => {
   });
 
   var restaurantByRG =[]
-
-/*   for( var i = 0; i<todayClientReservedGroups.length; i++){
-      console.log("Reserved Restaurant: " + todayClientReservedGroups[i].restaurantid);
-      for( var j = 0; j<restaurants.data.data.length; j++){
-        if(todayClientReservedGroups[i].restaurantid === restaurants.data.data[j]._id){
-            console.log("Check Restaurant: " + restaurants.data.data[j]._id);
-            restaurantByRG.push(restaurants.data.data[j]);
-        }
-      }
-  } */
-
+  
   todayClientReservedGroups.filter(r => {
     return restaurants.data.data.filter(rrg => {
         if(r.restaurantid === rrg._id){
