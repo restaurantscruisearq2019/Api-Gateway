@@ -10,6 +10,7 @@ const cors = require("cors");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 require("./routes/index")(app);
 
 app.use(router);

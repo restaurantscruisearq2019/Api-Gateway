@@ -3,7 +3,7 @@ const router = express.Router();
 const apiAdapter = require("../config/apiAdapter");
 const { restaurantsURL } = require('../config/apiRoutes');
 
-const BASE_URL = restaurantsURL.split('/', 1);
+const BASE_URL = restaurantsURL.split('/r', 1);
 const api = apiAdapter(BASE_URL[0]);
 
 router.get("/restaurants", (req, res) => {
