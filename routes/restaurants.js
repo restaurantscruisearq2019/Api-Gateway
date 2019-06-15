@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const apiAdapter = require("../config/apiAdapter");
+const { restaurantsURL } = require('../config/apiRoutes');
 
-const BASE_URL = "http://ec2-54-237-152-58.compute-1.amazonaws.com:5000";
-const api = apiAdapter(BASE_URL);
+const BASE_URL = restaurantsURL.split('/', 1);
+const api = apiAdapter(BASE_URL[0]);
 
 router.get("/restaurants", (req, res) => {
   api.get(req.originalUrl).then(resp => {

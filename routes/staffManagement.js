@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const apiAdapter = require('../config/apiAdapter');
+const { staffManagementURL } = require('../config/apiRoutes');
 
-const BASE_URL = 'http://ec2-3-95-202-154.compute-1.amazonaws.com:5000';
-const api = apiAdapter(BASE_URL);
+const api = apiAdapter(staffManagementURL);
 
 //Managers
 

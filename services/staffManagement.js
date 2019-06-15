@@ -1,10 +1,9 @@
 const axios = require("axios");
+const { managersURL, employeesURL } = require('../config/apiRoutes');
 
 const getStaffManagers = async () => {
-    const managersUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/managers";
-    const employeesUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
-    const managers = await axios.get(managersUrl);
-    const employees = await axios.get(employeesUrl);
+    const managers = await axios.get(managersURL);
+    const employees = await axios.get(employeesURL);
     
     const managerEmployees = employees.data.data.filter( e =>{
       return managers.data.data.filter( m => {
@@ -31,10 +30,8 @@ const getStaffManagers = async () => {
 };
 
 const getManagerAccount = async (userName, password) => {
-    const managersUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/managers";
-    const employeesUrl = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
-    const managers = await axios.get(managersUrl);
-    const employees = await axios.get(employeesUrl);
+    const managers = await axios.get(managersURL);
+    const employees = await axios.get(employeesURL);
 
     const managerUserNames = managers.data.data.filter(m => {
         return (m.userName === userName) && (m.password === password);
@@ -65,8 +62,7 @@ const getManagerAccount = async (userName, password) => {
 };
 
 const getStaffEmployees = async () => {
-    const url = "http://ec2-3-95-202-154.compute-1.amazonaws.com:5000/employees";
-    const res = await axios.get(url);
+    const res = await axios.get(employeesURL);
     return res.data.data;
 };
 
