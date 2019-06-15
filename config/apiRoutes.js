@@ -9,8 +9,6 @@ const staffManagementURL = "http://localhost:5003"; //To edit
 const managersURL = staffManagementURL+"/managers";
 const employeesURL = staffManagementURL+"/employees";
 
-const ldapURL = "http://localhost"; //To edit
-
 module.exports = {
     reservationURL,
     clientsURL,
@@ -20,6 +18,5 @@ module.exports = {
     staffManagementURL,
     managersURL,
     employeesURL,
-    ldapURL
 }
 
