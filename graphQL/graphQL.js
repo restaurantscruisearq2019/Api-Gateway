@@ -24,6 +24,8 @@ const {
 } = require("../services/staffManagement");
 const DailyReservation = require("../types/reservationTransaction");
 const getTodayClientReservation = require("../services/reservationTransaction");
+const { LDAPlogin } = require("../services/ldap");
+
 var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -112,7 +114,22 @@ var allGetQuery = new GraphQLObjectType({
         password: { type: GraphQLString }
       },
       resolve: async (source, { userName, password }) => {
-        const result = await getManagerAccount(userName, password);
+        const resultManager = await getManagerAccount(userName, password);
+        const resultLDAP = await LDAPlogin(userName, password);
+        if(!resultManager || !resultLDAP){
+          return null;
+        }
+        return resultManager;
+      }
+    },
+    LDAPVerify:{
+      type: GraphQLBoolean,
+      args: {
+        username: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve: async (source, { username, password }) => {
+        const result = await LDAPlogin(username, password);
         return result;
       }
     }
