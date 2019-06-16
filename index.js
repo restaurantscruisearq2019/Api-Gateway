@@ -60,7 +60,7 @@ const schema = new GraphQLSchema({
 });
 
 app.use(
-  "/graphql",
+  "/auth",
   graphqlHTTP({
     schema: schema,
     graphiql: true
@@ -89,7 +89,7 @@ app.use(function(req, res, next) {
   }
 });
 
-app.use(function proctectRoute(req, res, next) {
+app.use(function protectRoute(req, res, next) {
   if (req.user) {
     next();
   } else {
