@@ -89,13 +89,13 @@ app.use(function(req, res, next) {
   }
 });
 
-/* app.use(function protectRoute(req, res, next) {
+app.use(function protectRoute(req, res, next) {
   if (req.user) {
     next();
   } else {
     res.status(500).json({ error: "login is required" });
   }
-}); */
+});
 
 app.use(
   "/graphql",
