@@ -117,15 +117,10 @@ var allGetQuery = new GraphQLObjectType({
     verifyManager: {
       type: Manager,
       args: {
-        userName: { type: GraphQLString },
-        password: { type: GraphQLString }
+        username: { type: GraphQLString }
       },
-      resolve: async (source, { userName, password }) => {
-        const resultManager = await getManagerAccount(userName, password);
-        const resultLDAP = await LDAPlogin(userName, password);
-        if (!resultManager || !resultLDAP) {
-          return null;
-        }
+      resolve: async (source, { username }) => {
+        const resultManager = await getManagerAccount(username);
         return resultManager;
       }
     },

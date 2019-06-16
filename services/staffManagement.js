@@ -29,12 +29,12 @@ const getStaffManagers = async () => {
     return managersObj;
 };
 
-const getManagerAccount = async (userName, password) => {
+const getManagerAccount = async (userName) => {
     const managers = await axios.get(managersURL);
     const employees = await axios.get(employeesURL);
 
     const managerUserNames = managers.data.data.filter(m => {
-        return (m.userName === userName) && (m.password === password);
+        return (m.userName === userName);
     })
 
     if(managerUserNames.length !== 1){
