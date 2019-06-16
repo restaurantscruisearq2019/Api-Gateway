@@ -1,0 +1,3 @@
+module.exports = {
+  jwtKey: "UniversidadNacionaldeColombia"
+};

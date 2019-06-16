@@ -34,6 +34,7 @@
     "express-graphql": "^0.8.0",
     "express-ntlm": "^2.4.0",
     "graphql": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {

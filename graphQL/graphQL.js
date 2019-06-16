@@ -9,7 +9,13 @@ const {
 } = require("graphql");
 
 const Restaurant = require("../types/restaurant");
-const { getRestaurant, getDayInfoRestaurants, getRestaurantsByCategories, getRestaurantsByPricerange, getRestaurantsByMenu } = require("../services/restaurant");
+const {
+  getRestaurant,
+  getDayInfoRestaurants,
+  getRestaurantsByCategories,
+  getRestaurantsByPricerange,
+  getRestaurantsByMenu
+} = require("../services/restaurant");
 const { Client, Group, ReservedGroup } = require("../types/reservation");
 const {
   getReservationClients,
@@ -25,6 +31,7 @@ const {
 const DailyReservation = require("../types/reservationTransaction");
 const getTodayClientReservation = require("../services/reservationTransaction");
 const { LDAPlogin } = require("../services/ldap");
+const LDAPAuth = require("../types/ldapAuth");
 
 var allGetQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -41,9 +48,9 @@ var allGetQuery = new GraphQLObjectType({
         return result;
       }
     },
-    ClientDailyReservation:{
+    ClientDailyReservation: {
       type: DailyReservation,
-      args:{
+      args: {
         clientID: { type: GraphQLInt },
         date: { type: GraphQLString }
       },
@@ -107,7 +114,7 @@ var allGetQuery = new GraphQLObjectType({
         return result;
       }
     },
-    verifyManager:{
+    verifyManager: {
       type: Manager,
       args: {
         userName: { type: GraphQLString },
@@ -116,14 +123,14 @@ var allGetQuery = new GraphQLObjectType({
       resolve: async (source, { userName, password }) => {
         const resultManager = await getManagerAccount(userName, password);
         const resultLDAP = await LDAPlogin(userName, password);
-        if(!resultManager || !resultLDAP){
+        if (!resultManager || !resultLDAP) {
           return null;
         }
         return resultManager;
       }
     },
-    LDAPVerify:{
-      type: GraphQLBoolean,
+    LDAPVerify: {
+      type: LDAPAuth,
       args: {
         username: { type: GraphQLString },
         password: { type: GraphQLString }
