@@ -4,14 +4,16 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLBoolean,
-  GraphQLID
+  GraphQLID,
+  GraphQLList
 } = require("graphql/type");
 
 const MenuType = new GraphQLObjectType({
   name: "Menu",
   fields: () => ({
     mType: { type: new GraphQLNonNull(GraphQLString) },
-    priceRange: { type: new GraphQLNonNull(GraphQLString) }
+    priceRange: { type: new GraphQLNonNull(GraphQLString) },
+    description: { type: new GraphQLNonNull(GraphQLString)}
   })
 })
 
@@ -39,7 +41,12 @@ const Restaurant = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLBoolean),
       description: "Is the restaurant open?"
     },
-    menu: { type: new GraphQLNonNull(MenuType) }
+    menu: { type: new GraphQLNonNull(MenuType) },
+    description:{
+      type: new GraphQLNonNull(GraphQLString),
+      description: "Description of restaurant"
+    },
+    images: { type: new GraphQLList( new GraphQLNonNull(GraphQLString) )}
   })
 });
 
